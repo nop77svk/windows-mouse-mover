@@ -22,7 +22,7 @@ public partial class MainWindow : Window
         AvaloniaXamlLoader.Load(this);
     }
 
-    public void StartEmulation_Click(object sender, RoutedEventArgs e)
+    private void OnStartEmulationClick(object sender, RoutedEventArgs e)
     {
         if (cancellationTokenSource == null || cancellationTokenSource.Token.IsCancellationRequested)
         {
