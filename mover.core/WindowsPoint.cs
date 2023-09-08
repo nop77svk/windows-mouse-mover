@@ -2,8 +2,8 @@
 using System.Runtime.InteropServices;
 
 [StructLayout(LayoutKind.Sequential)]
-public struct WindowsPoint
+internal struct WindowsPoint
 {
-    public int X;
-    public int Y;
+    internal int X;
+    internal int Y;
 }
