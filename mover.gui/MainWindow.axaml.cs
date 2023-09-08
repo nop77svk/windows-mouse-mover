@@ -7,22 +7,16 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using NoP77svk.Mover.Core;
 
-public partial class MainWindow : Window
+internal partial class MainWindow : Window
 {
     private const string BtnStartEmulationContentStart = "Start emulation";
     private const string BtnStartEmulationContentStop = "Stop emulation";
 
     private CancellationTokenSource? mouseEmulationCTS;
 
-    public MainWindow()
+    internal MainWindow()
     {
         InitializeComponent();
-    }
-
-    // Define the MoveMouse function using P/Invoke
-    private static void MoveMouse(int x, int y)
-    {
-        WindowsNativeDllUser32.SetCursorPos(x, y);
     }
 
     private void InitializeComponent()
@@ -64,7 +58,7 @@ public partial class MainWindow : Window
             // Emulate mouse movement here
             // You can use P/Invoke to call user32.dll functions to move the mouse
             // Example:
-            MoveMouse(Random.Shared.Next(100), Random.Shared.Next(100));
+            MouseCursorPosition.SetAbsolute(Random.Shared.Next(100), Random.Shared.Next(100));
 
             // Delay for a short period to control the movement speed
             await Task.Delay(1000);
