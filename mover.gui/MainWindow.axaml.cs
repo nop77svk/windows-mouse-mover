@@ -10,7 +10,7 @@ using Avalonia.Markup.Xaml;
 
 public partial class MainWindow : Window
 {
-    private CancellationTokenSource? cancellationTokenSource;
+    private CancellationTokenSource? MouseEmulationCTS;
 
     public MainWindow()
     {
@@ -20,27 +20,32 @@ public partial class MainWindow : Window
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
+
+        btnStartEmulation = this.Find<Button>("btnStartEmulation");
     }
 
-    public void StartEmulation_Click(object sender, RoutedEventArgs e)
+    private void btnStartEmulation_Click(object? sender, RoutedEventArgs e)
     {
-        if (cancellationTokenSource == null || cancellationTokenSource.Token.IsCancellationRequested)
+        if (MouseEmulationCTS == null || MouseEmulationCTS.Token.IsCancellationRequested)
         {
-            cancellationTokenSource = new CancellationTokenSource();
+            MouseEmulationCTS = new CancellationTokenSource();
             StartMouseEmulation();
         }
         else
         {
-            cancellationTokenSource.Cancel();
+            MouseEmulationCTS.Cancel();
         }
     }
 
     private async void StartMouseEmulation()
     {
-        if (cancellationTokenSource == null)
-            throw new ArgumentNullException(nameof(cancellationTokenSource));
+        if (MouseEmulationCTS == null)
+        {
+            btnStartEmulation.Content = "Error: Cancellation somehow not possible";
+            return;
+        }
 
-        while (!cancellationTokenSource.Token.IsCancellationRequested)
+        while (!MouseEmulationCTS.Token.IsCancellationRequested)
         {
             // Emulate mouse movement here
             // You can use P/Invoke to call user32.dll functions to move the mouse
@@ -53,11 +58,13 @@ public partial class MainWindow : Window
     }
 
     // Define the MoveMouse function using P/Invoke
+/*
     [DllImport("user32.dll")]
     static extern bool SetCursorPos(int x, int y);
-
+*/
     private void MoveMouse(int x, int y)
     {
-        SetCursorPos(x, y);
+        btnStartEmulation.Content = $"{x},{y}";
+// 2do!        SetCursorPos(x, y);
     }
 }
