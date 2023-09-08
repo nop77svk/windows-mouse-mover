@@ -1,15 +1,16 @@
 namespace mover.gui;
 using System;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 
 public partial class MainWindow : Window
 {
+    private const string btnStartEmulationContentStart = "Start emulation";
+    private const string btnStartEmulationContentStop = "Stop emulation";
+
     private CancellationTokenSource? MouseEmulationCTS;
 
     public MainWindow()
@@ -22,6 +23,10 @@ public partial class MainWindow : Window
         AvaloniaXamlLoader.Load(this);
 
         btnStartEmulation = this.Find<Button>("btnStartEmulation");
+        if (btnStartEmulation == null)
+            throw new NullReferenceException("The emulation start button not found");
+            
+        btnStartEmulation.Content = btnStartEmulationContentStart;
     }
 
     private void btnStartEmulation_Click(object? sender, RoutedEventArgs e)
@@ -29,11 +34,13 @@ public partial class MainWindow : Window
         if (MouseEmulationCTS == null || MouseEmulationCTS.Token.IsCancellationRequested)
         {
             MouseEmulationCTS = new CancellationTokenSource();
+            btnStartEmulation.Content = btnStartEmulationContentStop;
             StartMouseEmulation();
         }
         else
         {
             MouseEmulationCTS.Cancel();
+            btnStartEmulation.Content = btnStartEmulationContentStart;
         }
     }
 
@@ -58,13 +65,8 @@ public partial class MainWindow : Window
     }
 
     // Define the MoveMouse function using P/Invoke
-/*
-    [DllImport("user32.dll")]
-    static extern bool SetCursorPos(int x, int y);
-*/
-    private void MoveMouse(int x, int y)
+    private static void MoveMouse(int x, int y)
     {
-        btnStartEmulation.Content = $"{x},{y}";
-// 2do!        SetCursorPos(x, y);
+        WindowsNativeDllUser32.SetCursorPos(x, y);
     }
 }
