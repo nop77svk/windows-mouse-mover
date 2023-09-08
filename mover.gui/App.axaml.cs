@@ -1,8 +1,7 @@
+namespace mover.gui;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-
-namespace mover.gui;
 
 public partial class App : Application
 {
