@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using NoP77svk.Mover.Core;
 
 public partial class MainWindow : Window
 {

@@ -54,6 +54,10 @@
 		<PackageReference Include="Avalonia.Themes.Simple" Version="11.0.4" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\mover.core\mover.core.csproj" />
+	</ItemGroup>
+
 	<Target Name="PostClean" AfterTargets="Clean">
 		<RemoveDir Directories="$(BaseIntermediateOutputPath)" />
 		<!-- obj -->

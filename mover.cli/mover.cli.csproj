@@ -43,6 +43,10 @@
 		<Compile Include="..\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\mover.core\mover.core.csproj" />
+	</ItemGroup>
+
 	<Target Name="PostClean" AfterTargets="Clean">
 		<RemoveDir Directories="$(BaseIntermediateOutputPath)" /><!-- obj -->
 		<RemoveDir Directories="$(BaseOutputPath)" /><!-- bin -->
