@@ -55,14 +55,11 @@ internal partial class MainWindow : Window
             return;
         }
 
-        int maxRelativeMouseMoveRandomizer = MaxRelativeMouseMove * 2 + 1;
+        IMouseCursorMover mouseCursorMover = new RelativeMouseCursorMover(MaxRelativeMouseMove);
 
         while (!mouseEmulationCTS.Token.IsCancellationRequested)
         {
-            int relativeMoveX = Random.Shared.Next(maxRelativeMouseMoveRandomizer) - MaxRelativeMouseMove;
-            int relativeMoveY = Random.Shared.Next(maxRelativeMouseMoveRandomizer) - MaxRelativeMouseMove;
-            MouseCursorPosition.SetRelative(relativeMoveX, relativeMoveY);
-
+            mouseCursorMover.NextMove();
             await Task.Delay(10);
         }
     }
