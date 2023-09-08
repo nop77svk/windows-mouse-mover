@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mover.gui", "mover.gui\move
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mover.cli", "mover.cli\mover.cli.csproj", "{68EC6C2C-FE13-45DB-8A74-A7DDACD0FFD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mover.core", "mover.core\mover.core.csproj", "{F638852B-C8F1-45A2-9774-9F0EE3DBF9D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +23,15 @@ Global
 		{68EC6C2C-FE13-45DB-8A74-A7DDACD0FFD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68EC6C2C-FE13-45DB-8A74-A7DDACD0FFD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68EC6C2C-FE13-45DB-8A74-A7DDACD0FFD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F638852B-C8F1-45A2-9774-9F0EE3DBF9D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F638852B-C8F1-45A2-9774-9F0EE3DBF9D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F638852B-C8F1-45A2-9774-9F0EE3DBF9D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F638852B-C8F1-45A2-9774-9F0EE3DBF9D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {53B47EFB-FCF3-4781-9D25-FF9289ED16A3}
 	EndGlobalSection
 EndGlobal
