@@ -1,4 +1,4 @@
-namespace mover.gui;
+namespace NoP77svk.Mover.Gui;
 using System.Runtime.InteropServices;
 
 public static class WindowsNativeDllUser32

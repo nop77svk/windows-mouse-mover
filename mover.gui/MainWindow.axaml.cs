@@ -1,4 +1,4 @@
-namespace mover.gui;
+namespace NoP77svk.Mover.Gui;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

@@ -1,4 +1,4 @@
-namespace NoP77svk.mover.cli;
+namespace NoP77svk.Mover.Cli;
 
 internal static class Program
 {

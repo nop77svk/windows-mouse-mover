@@ -1,6 +1,6 @@
-﻿namespace mover.gui;
-using Avalonia;
+﻿namespace NoP77svk.Mover.Gui;
 using System;
+using Avalonia;
 
 internal class Program
 {

@@ -6,17 +6,18 @@
 		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-		<Product>...</Product>
-		<AssemblyTitle>...</AssemblyTitle>
+		
+		<Product>Mouse Mover</Product>
+		<AssemblyTitle>Mouse Mover GUI</AssemblyTitle>
 		<Version>0.0.0</Version>
 		<Authors>Peter Hraško</Authors>
 		<Company>Open source community</Company>
 		<Copyright>Practically copyleft</Copyright>
 		<NoWarn>1701;1702;AD0001;NETSDK1182</NoWarn>
 
-		<RootNamespace>NoP77svk.mover.cli</RootNamespace>
-		<AssemblyName>NoP77svk.mover.cli</AssemblyName>
-		<PackageId>NoP77svk.mover.cli</PackageId>
+		<RootNamespace>NoP77svk.mover.gui</RootNamespace>
+		<AssemblyName>NoP77svk.mover.gui</AssemblyName>
+		<PackageId>NoP77svk.mover.gui</PackageId>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 
 		<BeautyLibsDir>./bin</BeautyLibsDir>

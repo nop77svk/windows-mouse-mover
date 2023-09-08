@@ -1,4 +1,4 @@
-namespace mover.gui;
+namespace NoP77svk.Mover.Gui;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
