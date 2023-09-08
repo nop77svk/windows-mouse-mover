@@ -1,21 +1,62 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+		<Product>...</Product>
+		<AssemblyTitle>...</AssemblyTitle>
+		<Version>0.0.0</Version>
+		<Authors>Peter Hraško</Authors>
+		<Company>Open source community</Company>
+		<Copyright>Practically copyleft</Copyright>
+		<NoWarn>1701;1702;AD0001;NETSDK1182</NoWarn>
 
+		<RootNamespace>NoP77svk.mover.cli</RootNamespace>
+		<AssemblyName>NoP77svk.mover.cli</AssemblyName>
+		<PackageId>NoP77svk.mover.cli</PackageId>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 
-  <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.0.4" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.0.4" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.4" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.4" />
-    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.4" />
-    <PackageReference Include="Avalonia.Themes.Simple" Version="11.0.4" />
-  </ItemGroup>
+		<BeautyLibsDir>./bin</BeautyLibsDir>
+		<BeautyHiddens>hostfxr;hostpolicy;*.deps.json;*.runtimeconfig*.json</BeautyHiddens>
+		<BeautyOnPublishOnly>True</BeautyOnPublishOnly>
+		<BeautyEnableDebugging>False</BeautyEnableDebugging>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DebugType>none</DebugType>
+		<DebugSymbols>false</DebugSymbols>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="nulastudio.NetBeauty" Version="2.1.2.1" />
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<Compile Include="..\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="11.0.4" />
+		<PackageReference Include="Avalonia.Desktop" Version="11.0.4" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.4" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.4" />
+		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.4" />
+		<PackageReference Include="Avalonia.Themes.Simple" Version="11.0.4" />
+	</ItemGroup>
+
+	<Target Name="PostClean" AfterTargets="Clean">
+		<RemoveDir Directories="$(BaseIntermediateOutputPath)" />
+		<!-- obj -->
+		<RemoveDir Directories="$(BaseOutputPath)" />
+		<!-- bin -->
+	</Target>
 </Project>
