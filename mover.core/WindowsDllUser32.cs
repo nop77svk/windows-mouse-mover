@@ -1,7 +1,7 @@
 namespace NoP77svk.Mover.Core;
 using System.Runtime.InteropServices;
 
-internal static class WindowsNativeAPI
+internal static class WindowsDllUser32
 {
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
