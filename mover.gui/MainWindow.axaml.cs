@@ -1,16 +1,17 @@
 namespace mover.gui;
 using System;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 
 public partial class MainWindow : Window
 {
-    private CancellationTokenSource? cancellationTokenSource;
+    private const string btnStartEmulationContentStart = "Start emulation";
+    private const string btnStartEmulationContentStop = "Stop emulation";
+
+    private CancellationTokenSource? MouseEmulationCTS;
 
     public MainWindow()
     {
@@ -20,27 +21,38 @@ public partial class MainWindow : Window
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
+
+        btnStartEmulation = this.Find<Button>("btnStartEmulation");
+        if (btnStartEmulation == null)
+            throw new NullReferenceException("The emulation start button not found");
+            
+        btnStartEmulation.Content = btnStartEmulationContentStart;
     }
 
-    private void OnStartEmulationClick(object sender, RoutedEventArgs e)
+    private void OnStartEmulationClick(object? sender, RoutedEventArgs e)
     {
-        if (cancellationTokenSource == null || cancellationTokenSource.Token.IsCancellationRequested)
+        if (MouseEmulationCTS == null || MouseEmulationCTS.Token.IsCancellationRequested)
         {
-            cancellationTokenSource = new CancellationTokenSource();
+            MouseEmulationCTS = new CancellationTokenSource();
+            btnStartEmulation.Content = btnStartEmulationContentStop;
             StartMouseEmulation();
         }
         else
         {
-            cancellationTokenSource.Cancel();
+            MouseEmulationCTS.Cancel();
+            btnStartEmulation.Content = btnStartEmulationContentStart;
         }
     }
 
     private async void StartMouseEmulation()
     {
-        if (cancellationTokenSource == null)
-            throw new ArgumentNullException(nameof(cancellationTokenSource));
+        if (MouseEmulationCTS == null)
+        {
+            btnStartEmulation.Content = "Error: Cancellation somehow not possible";
+            return;
+        }
 
-        while (!cancellationTokenSource.Token.IsCancellationRequested)
+        while (!MouseEmulationCTS.Token.IsCancellationRequested)
         {
             // Emulate mouse movement here
             // You can use P/Invoke to call user32.dll functions to move the mouse
@@ -53,11 +65,8 @@ public partial class MainWindow : Window
     }
 
     // Define the MoveMouse function using P/Invoke
-    [DllImport("user32.dll")]
-    static extern bool SetCursorPos(int x, int y);
-
-    private void MoveMouse(int x, int y)
+    private static void MoveMouse(int x, int y)
     {
-        SetCursorPos(x, y);
+        WindowsNativeDllUser32.SetCursorPos(x, y);
     }
 }
