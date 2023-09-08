@@ -12,6 +12,8 @@ internal partial class MainWindow : Window
     private const string BtnStartEmulationContentStart = "Start emulation";
     private const string BtnStartEmulationContentStop = "Stop emulation";
 
+    private const int MaxRelativeMouseMove = 5;
+
     private CancellationTokenSource? mouseEmulationCTS;
 
     internal MainWindow()
@@ -53,15 +55,15 @@ internal partial class MainWindow : Window
             return;
         }
 
+        int maxRelativeMouseMoveRandomizer = MaxRelativeMouseMove * 2 + 1;
+
         while (!mouseEmulationCTS.Token.IsCancellationRequested)
         {
-            // Emulate mouse movement here
-            // You can use P/Invoke to call user32.dll functions to move the mouse
-            // Example:
-            MouseCursorPosition.SetAbsolute(Random.Shared.Next(100), Random.Shared.Next(100));
+            int relativeMoveX = Random.Shared.Next(maxRelativeMouseMoveRandomizer) - MaxRelativeMouseMove;
+            int relativeMoveY = Random.Shared.Next(maxRelativeMouseMoveRandomizer) - MaxRelativeMouseMove;
+            MouseCursorPosition.SetRelative(relativeMoveX, relativeMoveY);
 
-            // Delay for a short period to control the movement speed
-            await Task.Delay(1000);
+            await Task.Delay(10);
         }
     }
 }
