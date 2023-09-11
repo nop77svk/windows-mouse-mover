@@ -14,9 +14,9 @@
 		<Copyright>Practically copyleft</Copyright>
 		<NoWarn>1701;1702;AD0001;NETSDK1182</NoWarn>
 
-		<RootNamespace>NoP77svk.mover.cli</RootNamespace>
-		<AssemblyName>NoP77svk.mover.cli</AssemblyName>
-		<PackageId>NoP77svk.mover.cli</PackageId>
+		<RootNamespace>NoP77svk.Mover.CLI</RootNamespace>
+		<AssemblyName>NoP77svk.Mover.CLI</AssemblyName>
+		<PackageId>NoP77svk.Mover.CLI</PackageId>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 
 		<BeautyLibsDir>./bin</BeautyLibsDir>
