@@ -3,6 +3,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using NoP77svk.Mover.Core;
@@ -25,33 +26,31 @@ internal partial class MainWindow : Window
     {
         AvaloniaXamlLoader.Load(this);
 
-        btnStartEmulation = this.Find<Button>("btnStartEmulation");
-        if (btnStartEmulation == null)
+        btnToggleEmulation = this.Find<ToggleButton>("btnToggleEmulation");
+        if (btnToggleEmulation == null)
             throw new NullReferenceException("The emulation start button not found");
-
-        btnStartEmulation.Content = BtnStartEmulationContentStart;
     }
 
-    private void OnStartEmulationClick(object? sender, RoutedEventArgs e)
+    private void OnStartEmulation(object? sender, RoutedEventArgs e)
     {
+        mouseEmulationCTS?.Cancel();
+
         if (mouseEmulationCTS == null || mouseEmulationCTS.Token.IsCancellationRequested)
-        {
             mouseEmulationCTS = new CancellationTokenSource();
-            btnStartEmulation.Content = BtnStartEmulationContentStop;
-            StartMouseEmulation();
-        }
-        else
-        {
-            mouseEmulationCTS.Cancel();
-            btnStartEmulation.Content = BtnStartEmulationContentStart;
-        }
+
+        StartMouseEmulation();
+    }
+
+    private void OnStopEmulation(object? sender, RoutedEventArgs e)
+    {
+        mouseEmulationCTS?.Cancel();
     }
 
     private async void StartMouseEmulation()
     {
         if (mouseEmulationCTS == null)
         {
-            btnStartEmulation.Content = "Error: Cancellation somehow not possible";
+            btnToggleEmulation.Content = "Error: Cancellation somehow not possible";
             return;
         }
 
