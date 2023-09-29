@@ -3,9 +3,8 @@
 public class RelativeMouseCursorMover : IMouseCursorMover
 {
     public RelativeMouseCursorMover(int livelinessFactor)
+        : this(livelinessFactor, livelinessFactor)
     {
-        LivelinessFactorX = livelinessFactor;
-        LivelinessFactorY = livelinessFactor;
     }
 
     public RelativeMouseCursorMover(int livelinessFactorX, int livelinessFactorY)
